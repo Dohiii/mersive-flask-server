@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://react-mersive-frontend.onrender.com"}})
+CORS(app, origins= "https://react-mersive-frontend.onrender.com")
 
 
 @app.route('/', methods=['POST'])

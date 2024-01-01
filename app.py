@@ -5,9 +5,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app, resources={r"*": {"origins": "*"}})
-
-
+CORS(app, resources={r"/api/*": {"origins": "https://react-mersive-frontend.onrender.com"}})
 
 
 @app.route('/', methods=['POST'])
@@ -28,16 +26,12 @@ def upload():
 
         url = f"https://{pod_ip}/Config/service/uploadLicense"
 
-        headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
-        }
 
         # Create a dictionary with authentication details
         auth = ('admin', pod_password)
 
         # Make the requests POST with file data
-        response = requests.post(url,verify=False, files={'LICENSE_pkg': (uploaded_file.filename, uploaded_file.read())}, auth=auth, headers=headers)
+        response = requests.post(url,verify=False, files={'LICENSE_pkg': (uploaded_file.filename, uploaded_file.read())}, auth=auth)
 
         responseData = response.json()
 
